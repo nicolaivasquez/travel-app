@@ -7,6 +7,6 @@ app.get('/hotels', (req, res) => {
     res.send(hotels);
 })
 
-app.listen(3000, () => {
+app.listen(9000, () => {
     console.log('Server started');
 });
