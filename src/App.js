@@ -15,15 +15,33 @@ class App extends Component {
 
     this.state = {
       hotels: [],
+      filter: {},
+      sort: {},
     }
   }
 
   componentWillMount() {
-    getHotels()
+   this.updateHotelList({});
+  }
+
+  updateHotelList = ({filter = {}, sort = {}}) => {
+    getHotels({
+      filter: filter || this.state.filter,
+      sort: sort || this.state.sort,
+    })
       .then((hotels) => {
-        console.log(hotels);
         this.setState({hotels});
-      });
+      })
+  }
+
+  handleSort = (value, direction) => {
+    const sort = {
+      value,
+      direction,
+    };
+
+    this.setState({sort});
+    this.updateHotelList({sort});
   }
 
   render() {
@@ -32,7 +50,9 @@ class App extends Component {
           <Article>
               <Header />
               <Banner />
-              <Control/>
+              <Control
+                onSort={this.handleSort}
+              />
               <Results hotels={this.state.hotels} />
           </Article>
       </GrommetApp>

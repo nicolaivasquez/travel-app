@@ -5,13 +5,20 @@ import Columns from 'grommet/components/Columns';
 import Sort from 'grommet-addons/components/Sort';
 
 const options = [
-  {label: 'A', value: 'A'},
-  {label: 'B', value: 'B'},
+  {label: 'Name', value: 'Name'},
+  {label: 'Distance', value: 'Distance'},
+  {label: 'Stars', value: 'Stars'},
+  {label: 'Cost', value: 'MinCost'},
+  {label: 'User Rating', value: 'UserRating'},
 ]
 
 export class Control extends Component {
   constructor(props) {
     super(props);
+  }
+
+  handleSort = ({value, direction}) => {
+    this.props.onSort(value, direction);
   }
 
   render() {
@@ -21,8 +28,9 @@ export class Control extends Component {
           <Box></Box>
           <Box>
             <Sort
-              value="A"
+              value={options[0].value}
               options={options}
+              onChange={this.handleSort}
             />
           </Box>
         </Columns>

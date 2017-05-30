@@ -1,4 +1,4 @@
-import { hotels } from './hotels';
+import { hotels, hotelsSort } from './hotels';
 
 const express = require('express');
 const app = express();
@@ -10,7 +10,15 @@ app.use((req, res, next) => {
 });
 
 app.get('/hotels', (req, res) => {
-    res.send(hotels);
+    let hotelsCopy = hotels.slice();
+
+    if (req.query.sortValue && req.query.sortDirection) {
+      hotelsCopy = hotelsSort(hotelsCopy, {
+        value: req.query.sortValue,
+        direction: req.query.sortDirection,
+      });
+    }
+    res.send(hotelsCopy);
 })
 
 app.listen(9000, () => {
