@@ -22,8 +22,17 @@ export const hotelsSort = (hotels, sort) => {
 export const hotelsFilter = (hotels, filters) => {
   return Object.keys(filters)
     .reduce((h, filter) => {
-      if (filter === 'Stars' || filter === 'Name') {
+      if (filters[filter] === '' || filters[filter] === []) {
+        return h;
+      }
+      if (filter === 'Stars') {
         return h.filter((hotel) => filters[filter].indexOf(hotel[filter]) > -1);
+      }
+      if (filter === 'Name') {
+        return h.filter((hotel) => hotel[filter].toLowerCase().indexOf(filters[filter].toLowerCase()) > -1);
+      }
+      if (filter === 'UserRating') {
+        return h.filter((hotel) => hotel[filter] >= filters[filter]);
       }
       return h.filter((hotel) => hotel[filter] <= filters[filter]);
     }, hotels);
