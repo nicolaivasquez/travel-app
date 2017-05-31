@@ -7,7 +7,7 @@ export class Header extends Component {
         return (
             <GrommetHeader>
                 <Title>
-                    Travel Republic App Test
+                    Hotel Search App
                 </Title>
             </GrommetHeader>
         );

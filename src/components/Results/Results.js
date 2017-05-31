@@ -5,10 +5,6 @@ import Tile from 'grommet/components/Tile';
 import Card from 'grommet/components/Card';
 import Box from 'grommet/components/Box';
 import Columns from 'grommet/components/Columns';
-import Heading from 'grommet/components/Heading';
-import Label from 'grommet/components/Label';
-import Meter from 'grommet/components/Meter';
-import Value from 'grommet/components/Value';
 import Image from 'grommet/components/Image';
 
 export class Results extends Component {
