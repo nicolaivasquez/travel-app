@@ -6,6 +6,7 @@ import Card from 'grommet/components/Card';
 import Box from 'grommet/components/Box';
 import Columns from 'grommet/components/Columns';
 import Image from 'grommet/components/Image';
+import Button from 'grommet/components/Button';
 import { Pagination } from '../Pagination/Pagination';
 
 const limit = 20;
@@ -56,14 +57,18 @@ export class Results extends Component {
               <Card
                 label={hotel.Location}
                 heading={hotel.Name}
-                description={<Columns>
-                  <Box>
-
-                  </Box>
+                description={<Columns size="small">
                   <Box>
                     <Image
                       src={hotel.ThumbnailUrl}
                       size="thumb"
+                    />
+                  </Box>
+                  <Box>
+                    <Button
+                      label="View Details"
+                      onClick={() => this.props.onDetail(hotel)}
+                      primary={true}
                     />
                   </Box>
                 </Columns>}

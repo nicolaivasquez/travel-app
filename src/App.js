@@ -8,6 +8,7 @@ import { Banner } from './components/Banner/Banner';
 import { Control } from './components/Control/Control';
 import { Results } from './components/Results/Results';
 import { Sidebar } from './components/Sidebar/Sidebar';
+import { Detail } from './components/Detail/Detail';
 import { getHotels } from './data';
 import './App.css';
 
@@ -19,6 +20,8 @@ class App extends Component {
       hotels: [],
       filter: {},
       sort: {},
+      detail: {},
+      showDetail: false,
     }
   }
 
@@ -56,6 +59,13 @@ class App extends Component {
     this.updateHotelList({filter})
   }
 
+  handleDetail = (hotel) => {
+    this.setState({
+      detail: hotel || {},
+      showDetail: !this.state.showDetail,
+    })
+  }
+
   render() {
     return (
       <GrommetApp>
@@ -72,10 +82,18 @@ class App extends Component {
                 <Sidebar
                   onFilter={this.handleFilter}
                 />
-                <Results hotels={this.state.hotels} />
+                <Results
+                  hotels={this.state.hotels}
+                  onDetail={this.handleDetail}
+                />
               </Split>
 
           </Article>
+          <Detail
+            hotel={this.state.detail}
+            show={this.state.showDetail}
+            onClose={() => this.handleDetail()}
+          />
       </GrommetApp>
     );
   }
