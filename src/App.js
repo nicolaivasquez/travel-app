@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import '../node_modules/grommet-css';
 import * as GrommetApp from 'grommet/components/App';
 import Article from 'grommet/components/Article';
+import Split from 'grommet/components/Split';
 import { Header } from './components/Header/Header';
 import { Banner } from './components/Banner/Banner';
 import { Control } from './components/Control/Control';
 import { Results } from './components/Results/Results';
+import { Sidebar } from './components/Sidebar/Sidebar';
 import { getHotels } from './data';
 import './App.css';
 
@@ -53,7 +55,14 @@ class App extends Component {
               <Control
                 onSort={this.handleSort}
               />
-              <Results hotels={this.state.hotels} />
+              <Split
+                showOnResponsive="both"
+                flex="right"
+              >
+                <Sidebar />
+                <Results hotels={this.state.hotels} />
+              </Split>
+
           </Article>
       </GrommetApp>
     );
