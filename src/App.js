@@ -51,7 +51,6 @@ class App extends Component {
       [key]: values || value
     }
     const filter = Object.assign({}, this.state.filter, changes);
-    console.log(changes, this.state.filter, filter)
 
     this.setState({filter});
     this.updateHotelList({filter})

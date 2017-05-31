@@ -12,8 +12,6 @@ app.use((req, res, next) => {
 app.get('/hotels', (req, res) => {
     let hotelsCopy = hotels.slice();
 
-    console.log(req.query);
-
     if (req.query.sortValue && req.query.sortDirection) {
       hotelsCopy = hotelsSort(hotelsCopy, {
         value: req.query.sortValue,
