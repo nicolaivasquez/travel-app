@@ -5,6 +5,7 @@ import Tile from 'grommet/components/Tile';
 import Card from 'grommet/components/Card';
 import Box from 'grommet/components/Box';
 import Columns from 'grommet/components/Columns';
+import Split from 'grommet/components/Split';
 import Image from 'grommet/components/Image';
 import Button from 'grommet/components/Button';
 import { Pagination } from '../Pagination/Pagination';
@@ -57,27 +58,32 @@ export class Results extends Component {
               <Card
                 label={hotel.Location}
                 heading={hotel.Name}
-                description={<Columns size="small">
-                  <Box>
+                description={<Box
+                  direction="row"
+                >
+                  <Box basis="1/4">
                     <Image
                       src={hotel.ThumbnailUrl}
                       size="thumb"
                     />
                   </Box>
-                  <Box>
+                  <Box basis="1/2">
                     <Button
                       label="View Details"
                       onClick={() => this.props.onDetail(hotel)}
-                      primary={true}
                     />
                   </Box>
-                </Columns>}
+                </Box>}
               />
             </Tile>
             )
           }
         </Tiles>
-        <Pagination/>
+        <Pagination
+          page={this.state.page}
+          pages={this.state.pages}
+          onChange={this.handlePageChange}
+        />
       </Section>
     );
   }
