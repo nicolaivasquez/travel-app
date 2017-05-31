@@ -54,6 +54,26 @@ class Search extends Component {
 }
 
 class Select extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = props.options.reduce((options, option) => {
+      options[option.name] = false;
+      return options;
+    }, {});
+  }
+
+  handleChange = (value, event) => {
+    const changes = {
+      [event.target.value]: event.target.checked
+    };
+    const newState = Object.assign({}, this.state, changes);
+
+    this.setState(changes);
+    this.props.onChange(value, event, Object.keys(newState)
+      .filter((key) => newState[key]));
+  }
+
   render() {
     return (
       <Box>
@@ -62,7 +82,9 @@ class Select extends Component {
           <Checkbox
             label={option.name}
             key={index}
-            onChange={(e) => this.props.onChange(this.props.value, e, option.name)}
+            value={option.name}
+            checked={this.state[option.name]}
+            onChange={(e) => this.handleChange(this.props.value, e)}
           />
           )
         }
@@ -84,8 +106,8 @@ class Number extends Component {
 }
 
 export class Sidebar extends Component {
-  handleChange = (key, event) => {
-    console.log(key, event.target.value);
+  handleChange = (key, event, ...args) => {
+    this.props.onFilter(key, event.target.value, ...args);
   };
 
   render() {

@@ -46,6 +46,17 @@ class App extends Component {
     this.updateHotelList({sort});
   }
 
+  handleFilter = (key, value, values = null) => {
+    const changes = {
+      [key]: values || value
+    }
+    const filter = Object.assign({}, this.state.filter, changes);
+    console.log(changes, this.state.filter, filter)
+
+    this.setState({filter});
+    this.updateHotelList({filter})
+  }
+
   render() {
     return (
       <GrommetApp>
@@ -59,7 +70,9 @@ class App extends Component {
                 showOnResponsive="both"
                 flex="right"
               >
-                <Sidebar />
+                <Sidebar
+                  onFilter={this.handleFilter}
+                />
                 <Results hotels={this.state.hotels} />
               </Split>
 

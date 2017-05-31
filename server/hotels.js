@@ -18,3 +18,13 @@ export const hotelsSort = (hotels, sort) => {
     });
   }
 }
+
+export const hotelsFilter = (hotels, filters) => {
+  return Object.keys(filters)
+    .reduce((h, filter) => {
+      if (filter === 'Stars' || filter === 'Name') {
+        return h.filter((hotel) => filters[filter].indexOf(hotel[filter]) > -1);
+      }
+      return h.filter((hotel) => hotel[filter] <= filters[filter]);
+    }, hotels);
+}

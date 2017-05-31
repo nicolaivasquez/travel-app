@@ -3,7 +3,10 @@ import * as axios from 'axios';
 const baseUrl = 'http://localhost:9000';
 
 export const getHotels = ({filter, sort}) => {
-  const filterString = '';
+  console.log(filter, sort);
+  const filterString = Object.keys(filter).length > 0 ?
+    Object.keys(filter).map((f) => `${encodeURIComponent(f)}=${encodeURIComponent(Array.isArray(filter[f]) ? filter[f].join(',') : filter[f])}`).join('&')
+    : '';
   const sortString = sort.value ?
     `sortValue=${sort.value}&sortDirection=${sort.direction}`
     : '';
